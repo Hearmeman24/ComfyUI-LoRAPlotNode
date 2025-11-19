@@ -2,6 +2,8 @@
 
 A custom ComfyUI node for testing multiple LoRA models across different strength values. Automatically generates model/clip pairs for each LoRA-strength combination and includes an image saver node with text overlay for easy identification.
 
+![Screenshot](screenshot.png)
+
 ## Features
 
 - Test multiple LoRAs with different strength values in a single workflow
