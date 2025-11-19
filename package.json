@@ -1,0 +1,22 @@
+{
+  "name": "ComfyUI-LoRAPlotNode",
+  "version": "1.0.0",
+  "description": "A ComfyUI node for testing multiple LoRAs across different strength values with automatic image labeling",
+  "author": "Hearmeman24",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hearmeman24/ComfyUI-LoRAPlotNode.git"
+  },
+  "keywords": [
+    "comfyui",
+    "lora",
+    "testing",
+    "plot",
+    "custom-node"
+  ],
+  "node_paths": {
+    "custom_nodes": "."
+  }
+}
+
