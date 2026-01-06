@@ -28,7 +28,7 @@ Documentation = "https://github.com/Hearmeman24/ComfyUI-LoRAPlotNode/wiki"
 "Bug Tracker" = "https://github.com/Hearmeman24/ComfyUI-LoRAPlotNode/issues"
 
 [tool.comfy]
-PublisherId = ""
+PublisherId = "hearmeman24"
 DisplayName = "ComfyUI-LoRAPlotNode"
 Icon = ""
 includes = [] 
