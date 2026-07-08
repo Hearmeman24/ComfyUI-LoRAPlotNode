@@ -308,20 +308,33 @@ class LoRAPlotImageSaver:
         
         return (output_images,)
     
+    # Candidate scalable font paths, in priority order, covering Linux, macOS and Windows.
+    _FONT_CANDIDATES = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",  # Linux
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",  # macOS
+        "/System/Library/Fonts/Helvetica.ttc",  # macOS
+        os.path.join(os.environ.get("SystemRoot", "C:\\Windows"), "Fonts", "arialbd.ttf"),  # Windows
+        os.path.join(os.environ.get("SystemRoot", "C:\\Windows"), "Fonts", "arial.ttf"),  # Windows
+    ]
+
     def _get_font(self, font_size):
         """
         Get font, caching by size to avoid reloading.
         """
         if font_size not in self._font_cache:
-            try:
-                # Try to use a nice font if available
-                font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
-            except:
+            font = None
+            for font_path in self._FONT_CANDIDATES:
                 try:
-                    # Try another common font path
-                    font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
-                except:
-                    # Fallback to default font
+                    font = ImageFont.truetype(font_path, font_size)
+                    break
+                except Exception:
+                    continue
+            if font is None:
+                try:
+                    # Pillow >= 10.1 supports a size argument on the default font
+                    font = ImageFont.load_default(size=font_size)
+                except TypeError:
+                    # Older Pillow: default font is fixed-size and won't scale
                     font = ImageFont.load_default()
             self._font_cache[font_size] = font
         return self._font_cache[font_size]
